@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>CHI RDV app - Admin Dashboard</title>
+    <title>Ananda - plateforme de gestion des engins</title>
 
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
@@ -72,7 +72,7 @@
                     <!-- sidebar menu -->
                     <ul class="nav sidebar-inner" id="sidebar-menu">
                         <li class="has-sub active expand">
-                            <a class="sidenav-item-link" href="javascript:void(0)">
+                            <a class="sidenav-item-link" href="{{route('dashboard')}}">
                                 <i class="mdi mdi-view-dashboard-outline"></i>
                                 <span class="nav-text">Dashboard</span>
                             </a>
@@ -86,7 +86,7 @@
                         </li>
 
                         <li class="has-sub">
-                            <a class="sidenav-item-link" href=''>
+                            <a class="sidenav-item-link" href='{{route("engins")}}'>
                                 <i class="mdi mdi-car"></i>
                                 <span class="nav-text">Engins</span>
                             </a>
@@ -177,6 +177,7 @@
                             <li class="dropdown user-menu">
                                 <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                     <img src='{{asset("admin_assets/img/avatar.png")}}' class="user-image" alt="User Image" />
+                                    <small class="pt-1">{{Auth::user()->name}}</small>
                                     <span class="d-none d-lg-inline-block"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
@@ -184,7 +185,7 @@
                                     <li class="dropdown-header">
                                         <img src='{{asset("admin_assets/img/avatar.png")}}' class="img-circle" alt="User Image" />
                                         <div class="d-inline-block">
-                                            <small class="pt-1"></small>
+                                            <small class="pt-1">{{Auth::user()->name}}</small>
                                         </div>
                                     </li>
 
@@ -221,7 +222,7 @@
                 <div class="copyright bg-white">
                     <p>
                         &copy; <span id="copy-year">2019</span>
-                        <a class="text-primary" href="https://coursierdhopital.org" target="_blank">CHI</a>.
+                        <a class="text-primary" href="https://hilexpertiz.com/" target="_blank">HilExpertiz</a>.
                     </p>
                 </div>
                 <script>

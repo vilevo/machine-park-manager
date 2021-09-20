@@ -29,6 +29,11 @@ Route::get('/utilisateurs', [UserController::class, 'get'])
 Route::post('/utilisateurs', [UserController::class, 'create'])
     ->middleware(['auth'])->name('utilisateurs.create');
 
+//engins
+Route::get('/engins', function () {
+    return view('engins');
+})->middleware(['auth'])->name('engins');
+
 Route::get('/test', function () {
     return view('admin');
 })->name('test');
