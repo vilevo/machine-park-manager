@@ -3,6 +3,20 @@
 @section('content')
 <div class="card card-default">
     <div class="card-header card-header-border-bottom">
+        @if ($errors->any())
+
+        <div class="alert alert-danger">
+            <div class="loading">Erreur</div>
+            <div class="error-message">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+        @endif
         <h2>Liste des utilisateurs | <small data-toggle="modal" data-target="#exampleModal" style="background: #0d4dd8; padding: 5px; border-radius: 5px 5px 5px 5px; color:#ffffff;"><a href="#" style="color: #ffffff;"><span class="mdi mdi-pencil"></span> Créer un nouvel utilisateur</a></small></h2>
         @if (session('status'))
         <div class="alert alert-success">
@@ -33,7 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
+                @foreach($users->all() as $user)
                 <tr>
                     <td scope="row">{{ $user->name }}</td>
                     <td>{{ $user->fonction }}</td>

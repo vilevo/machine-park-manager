@@ -11,34 +11,46 @@ class Engin extends Model
 
     protected $fillable = [
         'categorie_id',
-        'matricule',
+        'reference',
         'etat',
+        'name',
+        'type',
     ];
 
     protected $with = [
         'pannes',
-        'huiles',
+        'huile',
         'emplacements',
-        'type',
+        'categorie'
+    ];
+
+    const CAMION = 'camion';
+    const ENGIN = 'engin';
+    const AUTRE = 'autre';
+
+    public static $types = [
+        'camion',
+        'engin',
+        'autre'
     ];
 
     public function pannes()
     {
-        return $this->hasMany(Panne::class);
+        return $this->hasMany(Panne::class, 'engin_reference');
     }
 
-    public function huiles()
+    public function huile()
     {
-        return $this->hasMany(Huile::class);
+        return $this->belongsTo(Huile::class, 'engin_reference');
     }
 
     public function emplacements()
     {
-        return $this->hasMany(Emplacement::class);
+        return $this->hasMany(Emplacement::class, 'engin_reference');
     }
 
-    public function type()
+    public function categorie()
     {
-        return $this->hasOne(EnginCategorie::class, 'categorie_id');
+        return $this->belongsTo(EnginCategorie::class, 'categorie_id');
     }
 }

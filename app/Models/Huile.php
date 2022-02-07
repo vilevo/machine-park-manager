@@ -11,13 +11,16 @@ class Huile extends Model
 
     protected $fillable = [
         'engin_id',
+        'chauffeur',
+        'engin_reference',
         'type_huile',
         'quantite',
-        'reapprovisionnement',
+        'approvisionneur',
+        'reapprovisionnement'
     ];
 
-    public function engin()
+    public function engins()
     {
-        return $this->belongsTo(Engin::class);
+        return $this->hasMany(Engin::class, 'engin_reference');
     }
 }

@@ -15,6 +15,6 @@ class EnginCategorie extends Model
 
     public function engin()
     {
-        return $this->belongsTo(Engin::class, 'categorie_id');
+        return $this->hasMany(Engin::class, 'categorie_id');
     }
 }

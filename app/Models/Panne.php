@@ -14,10 +14,21 @@ class Panne extends Model
         'type_panne',
         'status',
         'mecanicien',
+        'chauffeur',
+        'engin_reference'
+    ];
+
+    protected $with = [
+        'engin'
     ];
 
     public function engin()
     {
-        return $this->belongsTo(Engin::class);
+        return $this->belongsTo(Engin::class, 'engin_reference');
     }
+
+    // public function chauffeurs()
+    // {
+    //     return $this->hasMany(User::class, 'chauffeur_id');
+    // }
 }

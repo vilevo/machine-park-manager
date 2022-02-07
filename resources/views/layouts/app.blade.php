@@ -27,7 +27,7 @@
 
 
     <!-- FAVICON -->
-    <link rel="icon" href='{{asset("admin_assets/img/lgchi.png")}}' />
+    <link rel="icon" href='{{asset("assets/img/ananda.jpg")}}' />
 
     <!--
     HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
@@ -62,7 +62,7 @@
                 <!-- Aplication Brand -->
                 <div class="app-brand">
                     <a href="">
-                        <img src='{{asset("admin_assets/img/lgchi.png")}}' class="brand-icon" alt="" width="40" height="40">
+                        <img src='{{asset("assets/img/ananda.jpg")}}' class="brand-icon" alt="" width="40" height="40">
                         <span class="brand-name">Admin Dashbord</span>
                     </a>
                 </div>
@@ -86,21 +86,21 @@
                         </li>
 
                         <li class="has-sub">
-                            <a class="sidenav-item-link" href='{{route("engins")}}'>
+                            <a class="sidenav-item-link" href='{{route("engins.get")}}'>
                                 <i class="mdi mdi-car"></i>
                                 <span class="nav-text">Engins</span>
                             </a>
                         </li>
 
                         <li class="has-sub">
-                            <a class="sidenav-item-link" href=''>
+                            <a class="sidenav-item-link" href='{{route("pannes.get")}}'>
                                 <i class="mdi mdi-alarm-light"></i>
                                 <span class="nav-text">Pannes</span>
                             </a>
                         </li>
 
                         <li class="has-sub">
-                            <a class="sidenav-item-link" href=''>
+                            <a class="sidenav-item-link" href='{{route("huiles.get")}}'>
                                 <i class="mdi mdi-alert"></i>
                                 <span class="nav-text">Niveau d'huile</span>
                             </a>
@@ -137,15 +137,17 @@
                     </button>
                     <!-- search form -->
                     <div class="search-form d-none d-lg-inline-block">
-                        <div class="input-group">
-                            <button type="button" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="mdi mdi-magnify"></i>
-                            </button>
-                            <input type="text" name="query" id="search-input" class="form-control" placeholder="Recherche..." autofocus autocomplete="off" />
-                        </div>
-                        <div id="search-results-container">
-                            <ul id="search-results"></ul>
-                        </div>
+                        <form action="{{route('engins.search')}}" method="POST">
+                            <div class="input-group">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                    <i class="mdi mdi-magnify"></i>
+                                </button>
+                                <input type="text" name="query" id="search-input" class="form-control" placeholder="Recherche..." autofocus autocomplete="off" />
+                            </div>
+                            <div id="search-results-container">
+                                <ul id="search-results"></ul>
+                            </div>
+                        </form>
                     </div>
 
                     <div class="navbar-right ">
@@ -222,6 +224,7 @@
                 <div class="copyright bg-white">
                     <p>
                         &copy; <span id="copy-year">2019</span>
+                        <a class="text-primary" href="#" target="_blank">ANANDA</a>, Conçu par
                         <a class="text-primary" href="https://hilexpertiz.com/" target="_blank">HilExpertiz</a>.
                     </p>
                 </div>
@@ -255,6 +258,7 @@
     <script src='{{asset("admin_assets/js/date-range.js")}}'></script>
     <script src='{{asset("admin_assets/js/map.js")}}'></script>
     <script src='{{asset("admin_assets/js/custom.js")}}'></script>
+    <script src="{{asset('js/app.js')}}"></script>
 </body>
 
 </html>

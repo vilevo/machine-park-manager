@@ -16,6 +16,7 @@ class CreateEmplacementsTable extends Migration
         Schema::create('emplacements', function (Blueprint $table) {
             $table->id();
             $table->bigInteger("engin_id")->unsigned();
+            $table->string("engin_reference")->nullable();
             $table->string("depart")->nullable();
             $table->string("destination")->nullable();
             $table->timestamps();

@@ -15,10 +15,13 @@ class CreatePannesTable extends Migration
     {
         Schema::create('pannes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("engin_id")->unsigned();
-            $table->string("type_panne")->nullable();
+            $table->bigInteger("engin_id")->unsigned()->nullable();
+            $table->string("engin_reference")->nullable();
+            $table->text("type_panne")->nullable();
             $table->boolean("status")->default(false);
             $table->string("mecanicien")->nullable();
+            $table->string("chauffeur")->nullable();
+            $table->dateTime("repare_le")->nullable();
             $table->timestamps();
             $table->foreign("engin_id")->references("id")->on("engins")->onDelete("cascade");
         });

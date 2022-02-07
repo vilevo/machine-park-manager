@@ -6,7 +6,11 @@
     <div class="col-xl-3 col-sm-6">
         <div class="card card-mini mb-4">
             <div class="card-body">
-                <h2 class="mb-1">71,503</h2>
+                @if(!empty($count_users))
+                <h2 class="mb-1">{{$count_users}}</h2>
+                @else
+                <h2 class="mb-1">0</h2>
+                @endif
                 <p>utilisateurs</p>
                 <div class="chartjs-wrapper">
                     <canvas id="barChart"></canvas>
@@ -17,7 +21,11 @@
     <div class="col-xl-3 col-sm-6">
         <div class="card card-mini  mb-4">
             <div class="card-body">
-                <h2 class="mb-1">9,503</h2>
+                @if(!empty($count_pannes))
+                <h2 class="mb-1">{{$count_pannes}}</h2>
+                @else
+                <h2 class="mb-1">0</h2>
+                @endif
                 <p>Engins en panne</p>
                 <div class="chartjs-wrapper">
                     <canvas id="dual-line"></canvas>
@@ -28,7 +36,11 @@
     <div class="col-xl-3 col-sm-6">
         <div class="card card-mini mb-4">
             <div class="card-body">
-                <h2 class="mb-1">71,503</h2>
+                @if(!empty($count_engins_deplace))
+                <h2 class="mb-1">{{$count_engins_deplace}}</h2>
+                @else
+                <h2 class="mb-1">0</h2>
+                @endif
                 <p>Engins en déplacement</p>
                 <div class="chartjs-wrapper">
                     <canvas id="area-chart"></canvas>
@@ -39,8 +51,8 @@
     <div class="col-xl-3 col-sm-6">
         <div class="card card-mini mb-4">
             <div class="card-body">
-                <h2 class="mb-1">9,503</h2>
-                <p>Engins ont besoins de Gasoil</p>
+                <!-- <h2 class="mb-1">{{count($huiles)}}</h2> -->
+                <p>Approvisionnement</p>
                 <div class="chartjs-wrapper">
                     <canvas id="line"></canvas>
                 </div>
@@ -63,26 +75,30 @@
                 <table class="table card-table table-responsive table-responsive-large" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Immatriculation</th>
-                            <th>Type d'engin</th>
-                            <th class="d-none d-md-table-cell">Etat</th>
-                            <th class="d-none d-md-table-cell">Dernier approvionement en Gasoil</th>
-                            <th class="d-none d-md-table-cell">Approvionement en Gasoil prévu</th>
-                            <th>Status</th>
+                            <th style="color: #1b223c; font-weight: bold;">Reference</th>
+                            <th class="d-none d-md-table-cell" style="color: #1b223c; font-weight: bold;">Modele</th>
+                            <th style="color: #1b223c; font-weight: bold;"> Type </th>
+                            <th class="d-none d-md-table-cell" style="color: #1b223c; font-weight: bold;">Catégorie</th>
+                            <th style="color: #1b223c; font-weight: bold;">Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if(!empty($engins))
+                        @foreach($engins->all() as $engin)
                         <tr>
-                            <td>24541</td>
-                            <td>
-                                <a class="text-dark" href=""> Coach Swagger</a>
+                            <td style="color: #212925;">{{$engin->reference }}</td>
+                            <td class="d-none d-md-table-cell">
+                                <a href="{{route('pannes.show', $engin->id)}}" style="color: #212925;">{{ $engin->name}}</a>
                             </td>
-                            <td class="d-none d-md-table-cell">1 Unit</td>
-                            <td class="d-none d-md-table-cell">Oct 20, 2018</td>
-                            <td class="d-none d-md-table-cell">Oct 20, 2018</td>
+                            <td style="color: #212925;">{{ $engin->type}}</td>
+                            <td class="d-none d-md-table-cell" style="color: #212925;">{{$engin->categorie->libelle}}</td>
                             <td>
-                                <span class="badge badge-success">Completed</span>
+                                @if($engin->en_panne == 1)
+                                <span class="badge badge-danger"><a href="{{route('pannes.show', $engin->id)}}" style="color: #ffff;">En panne</a> </span>
+                                @elseif($engin->en_panne == 0)
+                                <span class="badge badge-success">Fonctionne</span>
+                                @endif
                             </td>
                             <td class="text-right">
                                 <div class="dropdown show d-inline-block widget-dropdown">
@@ -98,106 +114,8 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>24541</td>
-                            <td>
-                                <a class="text-dark" href=""> Toddler Shoes, Gucci Watch</a>
-                            </td>
-                            <td class="d-none d-md-table-cell">2 Units</td>
-                            <td class="d-none d-md-table-cell">Oct 20, 2018</td>
-                            <td class="d-none d-md-table-cell">Oct 20, 2018</td>
-                            <td>
-                                <span class="badge badge-warning">Delayed</span>
-                            </td>
-                            <td class="text-right">
-                                <div class="dropdown show d-inline-block widget-dropdown">
-                                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdown-recent-order2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
-                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order2">
-                                        <li class="dropdown-item">
-                                            <a href="#">View</a>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <a href="#">Remove</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>24541</td>
-                            <td>
-                                <a class="text-dark" href=""> Hat Black Suits</a>
-                            </td>
-                            <td class="d-none d-md-table-cell">1 Unit</td>
-                            <td class="d-none d-md-table-cell">Nov 18, 2018</td>
-                            <td class="d-none d-md-table-cell">Oct 20, 2018</td>
-                            <td>
-                                <span class="badge badge-warning">On Hold</span>
-                            </td>
-                            <td class="text-right">
-                                <div class="dropdown show d-inline-block widget-dropdown">
-                                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdown-recent-order3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
-                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order3">
-                                        <li class="dropdown-item">
-                                            <a href="#">View</a>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <a href="#">Remove</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>24541</td>
-                            <td>
-                                <a class="text-dark" href=""> Backpack Gents, Swimming Cap Slin</a>
-                            </td>
-                            <td class="d-none d-md-table-cell">5 Units</td>
-                            <td class="d-none d-md-table-cell">Dec 13, 2018</td>
-                            <td class="d-none d-md-table-cell">Oct 20, 2018</td>
-                            <td>
-                                <span class="badge badge-success">Completed</span>
-                            </td>
-                            <td class="text-right">
-                                <div class="dropdown show d-inline-block widget-dropdown">
-                                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdown-recent-order4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
-                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order4">
-                                        <li class="dropdown-item">
-                                            <a href="#">View</a>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <a href="#">Remove</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>24541</td>
-                            <td>
-                                <a class="text-dark" href=""> Speed 500 Ignite</a>
-                            </td>
-                            <td class="d-none d-md-table-cell">1 Unit</td>
-                            <td class="d-none d-md-table-cell">Dec 23, 2018</td>
-                            <td class="d-none d-md-table-cell">Oct 20, 2018</td>
-                            <td>
-                                <span class="badge badge-danger">Cancelled</span>
-                            </td>
-                            <td class="text-right">
-                                <div class="dropdown show d-inline-block widget-dropdown">
-                                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdown-recent-order5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
-                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order5">
-                                        <li class="dropdown-item">
-                                            <a href="#">View</a>
-                                        </li>
-                                        <li class="dropdown-item">
-                                            <a href="#">Remove</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

@@ -10,7 +10,7 @@ class Emplacement extends Model
     use HasFactory;
 
     protected $fillable = [
-        'engin_id',
+        'engin_reference',
         'depart',
         'destination',
     ];
@@ -18,6 +18,6 @@ class Emplacement extends Model
 
     public function engin()
     {
-        return $this->belongsTo(Engin::class);
+        return $this->belongsTo(Engin::class, 'engin_reference');
     }
 }

@@ -16,8 +16,10 @@ class CreateEnginsTable extends Migration
         Schema::create('engins', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('categorie_id')->nullable();
-            $table->string('matricule')->unique();
-            $table->string('etat')->unique();
+            $table->string('name')->nullable();
+            $table->string('reference')->unique();
+            $table->string('etat')->nullable();
+            $table->string('type')->nullable();
             $table->string('photo')->default("engin.png");
             $table->timestamps();
         });

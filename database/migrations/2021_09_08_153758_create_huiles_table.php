@@ -15,10 +15,13 @@ class CreateHuilesTable extends Migration
     {
         Schema::create('huiles', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("engin_id")->unsigned();
+            $table->bigInteger("engin_id")->unsigned()->nullable();
+            $table->string("chauffeur")->nullable();
+            $table->string("engin_reference")->nullable();
             $table->string("type_huile")->nullable();
-            $table->string("quantite")->nullable();
-            $table->date("reapprovisionnement")->nullable();
+            $table->integer("quantite")->nullable();
+            $table->string("approvisionneur")->nullable();
+            $table->dateTime("reapprovisionnement")->nullable();
             $table->timestamps();
             $table->foreign("engin_id")->references("id")->on("engins")->onDelete("cascade");
         });

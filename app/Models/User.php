@@ -75,4 +75,9 @@ class User extends Authenticatable
 
         return in_array($role, $arr);
     }
+
+    // public function pannes()
+    // {
+    //     return $this->belongsTo(Panne::class, 'chauffeur_id');
+    // }
 }

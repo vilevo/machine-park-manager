@@ -9,7 +9,7 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    public function get()
+    public function index()
     {
         $users = User::paginate(10);
 
